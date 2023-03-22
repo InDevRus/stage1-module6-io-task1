@@ -8,9 +8,6 @@ class ProfileParseException extends IllegalArgumentException {
     }
 
     static ProfileParseException ofInvalidLine(String line, Throwable cause) {
-        return new ProfileParseException(MessageFormat.format("""
-                    Line
-                    {0}
-                    contains invalid information""", line), cause);
+        return new ProfileParseException(MessageFormat.format("This line contains invalid information: {0}", line), cause);
     }
 }

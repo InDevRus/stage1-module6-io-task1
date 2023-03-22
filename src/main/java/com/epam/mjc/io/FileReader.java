@@ -16,7 +16,7 @@ public class FileReader {
     private static final String PHONE_FIELD = "Phone";
     private static final String fieldNamesPattern = String.join("|", List.of(NAME_FIELD, AGE_FIELD, EMAIL_FIELD, PHONE_FIELD));
     //Nevertheless, neither regular expressions nor String.split method were studied, so I've chosen the first option.
-    private static final Pattern dataPattern = Pattern.compile("(%s): (.+)".formatted(fieldNamesPattern));
+    private static final Pattern dataPattern = Pattern.compile(String.format("(%s): (.+)", fieldNamesPattern));
 
     private void updateProfileFromLine(Profile profile, String line) {
         var matcher = dataPattern.matcher(line);
@@ -33,10 +33,23 @@ public class FileReader {
 
     private void updateProfile(Profile profile, String fieldName, String value) {
         switch (fieldName) {
-            case NAME_FIELD -> profile.setName(value);
-            case AGE_FIELD -> profile.setAge(Integer.parseInt(value));
-            case EMAIL_FIELD -> profile.setEmail(value);
-            case PHONE_FIELD -> profile.setPhone(Long.parseLong(value));
+            case NAME_FIELD: {
+                profile.setName(value);
+                break;
+            }
+            case AGE_FIELD: {
+                profile.setAge(Integer.parseInt(value));
+                break;
+            }
+
+            case EMAIL_FIELD: {
+                profile.setEmail(value);
+                break;
+            }
+            case PHONE_FIELD: {
+                profile.setPhone(Long.parseLong(value));
+                break;
+            }
         }
     }
 
